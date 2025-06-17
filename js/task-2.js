@@ -1,21 +1,35 @@
-function makeArray(firstArray,secondArray,maxLength)
-{
-     const totalArray = firstArray.concat(secondArray);
-     if(totalArray.length > maxLength)
-     {
-        //  totalArray.length = maxLength;
-        return totalArray.slice(0, maxLength);;
-     }
-     else
-     {
-         return totalArray;
-     }
+class Storage{
+    #items;
+    constructor(items){
+        this.#items = items;
+    }
+    getItems(){
+        return this.#items;
+    }
+    addItem(newItem){
+        if (!newItem) {
+        console.warn("Тут нічого немає!");
+        return;
+    }
+        this.#items.push(newItem);
+    }
+    removeItem(item){
+        if(this.#items.includes(item))
+        {
+            this.#items.splice(this.#items.indexOf(item), 1);
+        }
+    }
 }
 console.log("      ");
 console.log("Task-2"); 
-console.log(makeArray(["Mango", "Poly"], ["Ajax", "Chelsea"], 3)); // ["Mango", "Poly", "Ajax"]
-console.log(makeArray(["Mango", "Poly", "Houston"], ["Ajax", "Chelsea"], 4)); // ["Mango", "Poly", "Houston", "Ajax"]
-console.log(makeArray(["Mango"], ["Ajax", "Chelsea", "Poly", "Houston"], 3)); // ["Mango", "Ajax", "Chelsea"]
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 2)); // ["Earth", "Jupiter"]
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 4)); // ["Earth", "Jupiter", "Neptune", "Uranus"]
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus", "Venus"], 0)); // []
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+storage.removeItem("Scaner");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
